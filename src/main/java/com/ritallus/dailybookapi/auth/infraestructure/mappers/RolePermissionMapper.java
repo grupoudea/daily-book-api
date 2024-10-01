@@ -3,6 +3,7 @@ package com.ritallus.dailybookapi.auth.infraestructure.mappers;
 
 import com.ritallus.dailybookapi.auth.domain.models.RolePermission;
 import com.ritallus.dailybookapi.auth.infraestructure.database.jpa.entities.RolePermissionEntity;
+import com.ritallus.dailybookapi.commons.EntityMapper;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 

@@ -1,4 +1,4 @@
-package com.ritallus.dailybookapi.auth.infraestructure.mappers;
+package com.ritallus.dailybookapi.commons;
 
 import java.util.List;
 import java.util.Set;
