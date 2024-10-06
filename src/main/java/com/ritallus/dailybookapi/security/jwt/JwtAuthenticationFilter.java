@@ -3,7 +3,6 @@ package com.ritallus.dailybookapi.security.jwt;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ritallus.dailybookapi.auth.core.dtos.UserAuthDto;
 import com.ritallus.dailybookapi.auth.core.dtos.UserAuthRequest;
-import com.ritallus.dailybookapi.commons.MessageResponse;
 import com.ritallus.dailybookapi.commons.StandardResponse;
 import com.ritallus.dailybookapi.security.Constants;
 import jakarta.servlet.FilterChain;

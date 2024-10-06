@@ -45,15 +45,14 @@ public class TokenUtils {
                 .compact();
     }
 
-    public static UsernamePasswordAuthenticationToken getAuthentication(String token) {
+    public static String getSubjectFromToken(String token) {
         try {
             Claims claims = Jwts.parserBuilder()
                     .setSigningKey(JWT_SECRET.getBytes())
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
-            String email = claims.getSubject();
-            return new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
+            return claims.getSubject();
         } catch (JwtException e) {
             LOGGER.error("Error en authentication", e);
             return null;
