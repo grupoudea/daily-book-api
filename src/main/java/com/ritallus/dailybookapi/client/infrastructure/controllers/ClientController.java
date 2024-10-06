@@ -37,7 +37,7 @@ public class ClientController {
         return ResponseEntity.ok(String.format("A client has been returned with id %d", clientId));
     }
 
-    @Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_SELLER", "ROLE_SALES_MANAGER"})
     @GetMapping("/get-all")
     public ResponseEntity<String> getAllClients(){
         LOGGER.info("Returning all clients...");

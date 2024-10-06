@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ritallus.dailybookapi.auth.core.dtos.UserAuthDto;
 import com.ritallus.dailybookapi.auth.core.dtos.UserAuthRequest;
 import com.ritallus.dailybookapi.commons.StandardResponse;
-import com.ritallus.dailybookapi.security.Constants;
+import com.ritallus.dailybookapi.commons.Constants;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import java.io.IOException;
 import java.util.Collections;
 
-import static com.ritallus.dailybookapi.security.Constants.BEARER;
+import static com.ritallus.dailybookapi.commons.Constants.BEARER;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 

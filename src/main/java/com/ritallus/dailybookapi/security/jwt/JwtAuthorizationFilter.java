@@ -1,7 +1,7 @@
 package com.ritallus.dailybookapi.security.jwt;
 
 
-import com.ritallus.dailybookapi.security.Constants;
+import com.ritallus.dailybookapi.commons.Constants;
 import com.ritallus.dailybookapi.security.UserAuthService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
