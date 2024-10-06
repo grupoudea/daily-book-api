@@ -39,10 +39,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
         final String token = TokenUtils.generateToken(authResult);
-        var userAuth = UserAuthDto.builder().token(token).tokenType(BEARER).build();
-        //response.addHeader(Constants.AUTHORIZATION, Constants.BEARER + token);
+        var userAuth = UserAuthDto.builder()
+                .token(token)
+                .tokenType(BEARER)
+                .build();
+        StandardResponse<UserAuthDto> standardResponse = new StandardResponse<>(userAuth);
 
-
+        response.addHeader(Constants.AUTHORIZATION, Constants.BEARER + token);
+        response.getWriter().write(new ObjectMapper().writeValueAsString(standardResponse));
+        response.getWriter().flush();
         super.successfulAuthentication(request, response, chain, authResult);
     }
 }
