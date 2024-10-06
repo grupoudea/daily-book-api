@@ -8,5 +8,7 @@ public interface UserRepositoryPort {
 
     Optional<User> findByEmail(String email);
 
+    void validateExistsEmail(String email);
+
     User save(User user);
 }

@@ -1,9 +1,8 @@
 package com.ritallus.dailybookapi.auth.infraestructure.controllers;
 
-import com.ritallus.dailybookapi.auth.core.dtos.UserAuthDto;
-import com.ritallus.dailybookapi.auth.core.dtos.UserAuthRequest;
-import com.ritallus.dailybookapi.auth.core.services.ports.AuthenticationServicePort;
+import com.ritallus.dailybookapi.auth.core.dtos.UserRegisterRequest;
 import com.ritallus.dailybookapi.auth.core.services.ports.UserServicePort;
+import com.ritallus.dailybookapi.auth.domain.models.User;
 import com.ritallus.dailybookapi.commons.StandardResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -21,17 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserServicePort userServicePort;
-    private final AuthenticationServicePort authenticationServicePort;
 
-    @PostMapping("/authenticate")
-    @Operation(summary = "Login")
+    @PostMapping("/register")
+    @Operation(summary = "Register user")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Data updated successfully"),
+            @ApiResponse(responseCode = "200", description = "Data created successfully"),
             @ApiResponse(responseCode = "400", description = "The request is invalid"),
             @ApiResponse(responseCode = "500", description = "Internal error processing response"),
     })
-    public ResponseEntity<StandardResponse<UserAuthDto>> authentication(@RequestBody UserAuthRequest request) {
-        var user = authenticationServicePort.authentication(request);
+    public ResponseEntity<StandardResponse<User>> register(@RequestBody UserRegisterRequest request) {
+        var user = userServicePort.register(request);
         return ResponseEntity.ok(new StandardResponse<>(user));
     }
 }

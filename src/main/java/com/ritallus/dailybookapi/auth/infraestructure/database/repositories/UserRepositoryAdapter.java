@@ -5,6 +5,7 @@ import com.ritallus.dailybookapi.auth.domain.repositories.UserRepositoryPort;
 import com.ritallus.dailybookapi.auth.infraestructure.database.jpa.UserRepositoryJpa;
 import com.ritallus.dailybookapi.auth.infraestructure.mappers.UserMapper;
 import com.ritallus.dailybookapi.commons.MessageResponse;
+import com.ritallus.dailybookapi.commons.exceptions.DataDuplicateException;
 import com.ritallus.dailybookapi.commons.exceptions.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,13 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     public Optional<User> findByEmail(String email) {
         return Optional.ofNullable(userMapper.toModel(userRepositoryJpa.findByEmail(email).orElseThrow(() ->
                 new DataNotFoundException(MessageResponse.USER_NOT_FOUND_EXCEPTION))));
+    }
+
+    public void validateExistsEmail(String email) {
+        userRepositoryJpa.findByEmail(email)
+                .ifPresent(user -> {
+                    throw new DataDuplicateException(MessageResponse.USER_ALREADY_EXISTS);
+                });
     }
 
     public User save(User user) {
