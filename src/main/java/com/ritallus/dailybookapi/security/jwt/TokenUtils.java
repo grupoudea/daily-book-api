@@ -1,9 +1,12 @@
 package com.ritallus.dailybookapi.security.jwt;
 
+import com.ritallus.dailybookapi.client.infrastructure.controllers.ClientController;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +18,7 @@ import java.util.Date;
 
 @Component
 public class TokenUtils {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TokenUtils.class);
 
     private static String JWT_SECRET;
     private static String JWT_EXPIRATION_TIME;
@@ -51,6 +55,7 @@ public class TokenUtils {
             String email = claims.getSubject();
             return new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
         } catch (JwtException e) {
+            LOGGER.error("Error en authentication", e);
             return null;
         }
     }

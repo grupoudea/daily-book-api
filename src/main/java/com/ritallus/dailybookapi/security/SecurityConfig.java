@@ -1,6 +1,7 @@
 package com.ritallus.dailybookapi.security;
 
 import com.ritallus.dailybookapi.configs.CORSFilter;
+import com.ritallus.dailybookapi.configs.CustomAccessDeniedHandler;
 import com.ritallus.dailybookapi.security.jwt.JwtAuthenticationEntryPoint;
 import com.ritallus.dailybookapi.security.jwt.JwtAuthenticationFilter;
 import com.ritallus.dailybookapi.security.jwt.JwtAuthorizationFilter;
@@ -50,10 +51,14 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(AUTH_LIST).permitAll()
+                        .requestMatchers("/client/get-all").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint))
+                .exceptionHandling(exception -> {
+                    exception.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                            .accessDeniedHandler(new CustomAccessDeniedHandler());
+                })
                 .addFilterBefore(corsFilter, ChannelProcessingFilter.class)
                 .addFilter(jwtAuthenticationFilter)
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);

@@ -1,7 +1,10 @@
 package com.ritallus.dailybookapi.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ritallus.dailybookapi.auth.core.dtos.UserAuthDto;
 import com.ritallus.dailybookapi.auth.core.dtos.UserAuthRequest;
+import com.ritallus.dailybookapi.commons.MessageResponse;
+import com.ritallus.dailybookapi.commons.StandardResponse;
 import com.ritallus.dailybookapi.security.Constants;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -13,6 +16,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import java.io.IOException;
 import java.util.Collections;
+
+import static com.ritallus.dailybookapi.security.Constants.BEARER;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -33,9 +38,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-        String token = TokenUtils.generateToken(authResult);
-        response.addHeader(Constants.AUTHORIZATION, Constants.BEARER + token);
-        response.getWriter().flush();
+        final String token = TokenUtils.generateToken(authResult);
+        var userAuth = UserAuthDto.builder().token(token).tokenType(BEARER).build();
+        //response.addHeader(Constants.AUTHORIZATION, Constants.BEARER + token);
+
+
         super.successfulAuthentication(request, response, chain, authResult);
     }
 }
