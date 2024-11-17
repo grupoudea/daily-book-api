@@ -3,6 +3,7 @@ package com.ritallus.dailybookapi.sales.core.services;
 
 import com.ritallus.dailybookapi.commons.CustomUtilService;
 import com.ritallus.dailybookapi.sales.core.dtos.CreateSaleInvoiceRequest;
+import com.ritallus.dailybookapi.sales.core.dtos.SaleInvoiceReportResponse;
 import com.ritallus.dailybookapi.sales.core.services.ports.ProductStockDetailServicePort;
 import com.ritallus.dailybookapi.sales.core.services.ports.ProductStockServicePort;
 import com.ritallus.dailybookapi.sales.core.services.ports.SaleInvoiceDetailServicePort;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -88,5 +90,9 @@ public class SaleInvoiceService implements SaleInvoiceServicePort {
         saleInvoice.setCreatedDate(LocalDateTime.now());
         saleInvoice.setLastUpdate(LocalDateTime.now());
         return repository.save(saleInvoice);
+    }
+
+    public List<SaleInvoiceReportResponse> getDailyReport() {
+        return repository.getDailyReport();
     }
 }
