@@ -1,5 +1,7 @@
 package com.ritallus.dailybookapi.sales.domain.repositories;
 
-public interface SupplierPurchaseDetailRepositoryPort {
+import com.ritallus.dailybookapi.sales.domain.models.SupplierPurchaseDetail;
 
+public interface SupplierPurchaseDetailRepositoryPort {
+    SupplierPurchaseDetail save(SupplierPurchaseDetail supplierPurchaseDetail);
 }
