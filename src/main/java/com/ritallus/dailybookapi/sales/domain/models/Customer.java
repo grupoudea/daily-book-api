@@ -17,7 +17,7 @@ public class Customer {
     private Long idCompany;
     private String identificationNumber;
     private Long idIdentificationType;
-    private String firsName;
+    private String firstName;
     private String lastName;
     private String phone;
     private String email;

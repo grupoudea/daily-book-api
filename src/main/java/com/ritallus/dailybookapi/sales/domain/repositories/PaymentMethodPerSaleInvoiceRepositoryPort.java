@@ -1,5 +1,7 @@
 package com.ritallus.dailybookapi.sales.domain.repositories;
 
-public interface PaymentMethodPerSaleInvoiceRepositoryPort {
+import com.ritallus.dailybookapi.sales.domain.models.PaymentMethodPerSaleInvoice;
 
+public interface PaymentMethodPerSaleInvoiceRepositoryPort {
+    PaymentMethodPerSaleInvoice save(PaymentMethodPerSaleInvoice paymentMethodPerSaleInvoice);
 }
