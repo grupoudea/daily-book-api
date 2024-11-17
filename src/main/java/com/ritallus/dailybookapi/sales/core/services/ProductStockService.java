@@ -2,11 +2,14 @@ package com.ritallus.dailybookapi.sales.core.services;
 
 
 import com.ritallus.dailybookapi.sales.core.services.ports.ProductStockServicePort;
+import com.ritallus.dailybookapi.sales.domain.models.Product;
 import com.ritallus.dailybookapi.sales.domain.models.ProductStock;
 import com.ritallus.dailybookapi.sales.domain.models.ProductStockDetail;
 import com.ritallus.dailybookapi.sales.domain.repositories.ProductStockRepositoryPort;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
