@@ -1,5 +1,9 @@
 package com.ritallus.dailybookapi.sales.domain.repositories;
 
-public interface CustomerRepositoryPort {
+import com.ritallus.dailybookapi.sales.domain.models.Customer;
 
+import java.util.List;
+
+public interface CustomerRepositoryPort {
+    List<Customer> getCustomers();
 }

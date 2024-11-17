@@ -35,7 +35,7 @@ public class SecurityConfig {
             "/swagger-resources/**", "/swagger-ui/index.html", "/swagger-ui.index.html", "/swagger-ui/**", "/v3/api-docs/swagger-config/**",
             "/webjars/**",
             "/users/authenticate", "/users/register", "/h2-console/**",
-            "/sales/**","/products/**"};
+            "/sales/**","/products/**","/customers/**"};
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
