@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Table(name = "users")
 @Entity
@@ -23,6 +24,9 @@ public class UserEntity {
 
     @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -42,6 +46,14 @@ public class UserEntity {
     @Column(name = "last_update", nullable = false)
     private LocalDateTime lastUpdate;
 
-    @Column(name = "last_login", nullable = false)
+    @Column(name = "last_login")
     private LocalDateTime lastLogin;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_role")
+    )
+    private List<RoleEntity> roles;
 }

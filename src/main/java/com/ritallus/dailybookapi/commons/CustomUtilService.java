@@ -20,4 +20,8 @@ public class CustomUtilService {
             throw new RequiredException(MessageResponse.MISSING_REQUIRED_FIELD);
         }
     }
+
+    public static String GetNameFromEmail(String email) {
+        return email.split("@")[0];
+    }
 }
